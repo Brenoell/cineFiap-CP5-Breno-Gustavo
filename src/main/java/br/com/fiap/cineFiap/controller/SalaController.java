@@ -2,6 +2,7 @@ package br.com.fiap.cineFiap.controller;
 
 import br.com.fiap.cineFiap.models.Sala;
 import br.com.fiap.cineFiap.service.SalaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,4 +28,13 @@ public class SalaController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping
+    public ResponseEntity<String> cadastroSala(@RequestBody Sala sala){
+        try {
+            salaService.cadastrar(sala);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Funcionou com sucesso!");
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar sala: " + e.getMessage());
+        }
+    }
 }
