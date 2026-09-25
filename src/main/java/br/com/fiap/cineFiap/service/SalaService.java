@@ -44,6 +44,17 @@ public class SalaService{
 
         salaDAO.cadastrar(sala);
     }
+    public void alterar(Sala sala){
+
+        if(sala == null){
+            throw new IllegalArgumentException("Sala não existe.");
+        }
+        if(sala.getDataExclusao() != null){
+            throw new IllegalArgumentException("A sala tem que estar ativa.");
+        }
+
+        salaDAO.alterar(sala);
+    }
 }
 
 

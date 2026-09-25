@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/salas")
@@ -36,5 +37,15 @@ public class SalaController {
         }catch (IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao cadastrar sala: " + e.getMessage());
         }
+    }
+    @PutMapping("/{id}") /*Alteração de dados com @PutMapping*/
+    public ResponseEntity<Void> alterar(@PathVariable Long id,
+                                        @RequestBody Sala sala){
+        var sala1 = salaService.listarPorId(id);
+        if (Objects.equals(sala.getId(),sala1.getId())){
+            salaService.alterar (sala);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
