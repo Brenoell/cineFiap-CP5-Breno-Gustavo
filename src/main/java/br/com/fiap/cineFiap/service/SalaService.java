@@ -55,6 +55,10 @@ public class SalaService{
 
         salaDAO.alterar(sala);
     }
+
+    public void deletar(long id) {
+        salaDAO.deletar(id);
+    }
 }
 
 

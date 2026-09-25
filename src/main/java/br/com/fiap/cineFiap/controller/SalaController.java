@@ -48,4 +48,14 @@ public class SalaController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/excluir/{id}")
+    public ResponseEntity<Sala> eLogica(@PathVariable Long id){
+        var sala = salaService.listarPorId(id);
+        if (sala.getId()!= null)
+            salaService.deletar(id);
+            return ResponseEntity.ok(sala);
+        return ResponseEntity.notFound().build();
+    }
+
 }
