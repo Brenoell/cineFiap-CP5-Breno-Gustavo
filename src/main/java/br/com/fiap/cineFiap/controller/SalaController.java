@@ -19,6 +19,12 @@ public class SalaController {
         return salaService.listar();
     }
 
-
+    @GetMapping("/{id}") /*Buscar sala por ID CONTROLER*/
+    public ResponseEntity<Sala> buscarPorId(@PathVariable Long id){
+        var sala = salaService.listarPorId(id);
+        if(sala.getId() != null)
+            return ResponseEntity.ok(sala);
+        return ResponseEntity.notFound().build();
+    }
 
 }

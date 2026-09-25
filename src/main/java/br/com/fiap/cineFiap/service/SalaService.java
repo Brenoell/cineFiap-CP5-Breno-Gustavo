@@ -19,6 +19,16 @@ public class SalaService{
         System.out.println("Teste se entra na Service");
         return salaDAO.listar();
     }
+
+    public Sala listarPorId(Long id){
+
+        var sala = salaDAO.buscarPorId(id);
+        if (sala.getDataExclusao() != null){
+            throw new IllegalArgumentException(
+                    "Id procurado foi excluido logicamente");
+        }
+        return sala;
+    }
 }
 
 
